@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <h3>Cập Nhật Sản Phẩm</h3>
+    <form th:action="@{/admin/product/update}" th:object="${detailProduct}" method="post">
+        <div class="col-sm-12">
+            <div class="from-group">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>ID Của Sản Phẩm: </label>
+                        <input type="text" class="form-control" name="idProduct" th:field="*{idProduct}" readonly/>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Tên Của Sản Phẩm: </label>
+                        <input type="text" class="form-control" name="nameProduct" th:field="*{nameProduct}"
+                               placeholder="Nhập Tên Của Sản Phẩm"/>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Trạng Thái: </label>
+                        <select name="status" class="form-control">
+                            <option value="1" th:selected="${detailProduct.status == 1}">
+                                Đang Hoạt Động
+                            </option>
+                            <option value="0" th:selected="${detailProduct.status == 0}">
+                                Ngừng Hoạt Động
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-floppy-fill"></i>
+                        Lưu Lại
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>

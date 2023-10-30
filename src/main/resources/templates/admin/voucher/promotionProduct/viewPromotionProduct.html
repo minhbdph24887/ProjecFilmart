@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <h3>Cập Nhật Khuyến Mại</h3>
+    <form th:action="@{/admin/voucher/update}" th:object="${detailPromotion}" method="post">
+        <div class="form-group">
+            <div class="col-sm-4">
+                <label>ID Của Khuyến Mại: </label>
+                <input type="text" class="form-control" name="idPromotion" th:field="*{idPromotion}" readonly/>
+            </div>
+            <div class="col-sm-4">
+                <label>Mã Của Khuyến Mại: </label>
+                <input type="text" class="form-control" name="codePromotion" th:field="*{codePromotion}" readonly/>
+            </div>
+            <div class="col-sm-4">
+                <label>Trạng Thái: </label>
+                <input type="hidden" name="status" th:field="*{status}"/>
+                <input type="text" class="form-control" th:value="${detailPromotion.getAllStatus()}" readonly/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-3">
+                <label>Tên Khuyến Mại: </label>
+                <input type="text" class="form-control" name="namePromotion" th:field="*{namePromotion}"
+                       placeholder="Nhập Tên Voucher"/>
+            </div>
+            <div class="col-sm-3">
+                <label>Số Tiền Giảm Của Voucher: </label>
+                <input type="text" class="form-control" name="person" th:field="*{person}"
+                       placeholder="Nhập Số Tiền Giảm Của Voucher"/>
+            </div>
+            <div class="col-sm-3">
+                <label>Số Lượng Voucher: </label>
+                <input type="text" class="form-control" name="quantity" th:field="*{quantity}"
+                       placeholder="Nhập Số Lượng Của Voucher"/>
+            </div>
+            <div class="col-sm-3">
+                <label>Mô Tả: </label>
+                <textarea class="form-control" name="description" th:field="*{description}"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-6">
+                <label>Ngày Bắt Đầu Voucher: </label>
+                <input type="date" class="form-control" name="startDate" th:field="*{startDate}"/>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Ngày Kết Thúc Voucher: </label>
+                    <input type="date" class="form-control" name="endDate" th:field="*{endDate}"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="navbar-nav">
+                <h3>Danh Sách Sản Phẩm Áp Dụng Được Voucher</h3>
+            </div>
+            <div class="navbar-right">
+                <a th:href="@{/admin/voucherdetail/view-add}" class="btn btn-info">
+                    <i class="bi bi-bag-plus-fill"></i>
+                    Thêm Sản Phẩm Để Được Khuyến Mại
+                </a>
+            </div>
+            <br>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Trạng Thái</th>
+                    <th>Hành Động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="listPromotionProduct, stat : ${listPromotionProduct}">
+                    <td th:text="${stat.count}"></td>
+                    <td th:text="${listPromotionProduct.productDetail.product.nameProduct}"></td>
+                    <td th:text="${listPromotionProduct.getAllStatus()}"></td>
+                    <td>
+                        <a th:href="@{/admin/voucherdetail/remove/{id}(id=${listPromotionProduct.idPromotionProduct})}"
+                           class="btn btn-danger"><i
+                                class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center pagination-sm">
+                    <li th:each="i : ${#numbers.sequence(0, listPromotionProduct.totalPages - 1)}"
+                        th:class="${i == page ? 'active' : ''}" class="page-item">
+                        <a th:href="@{/admin/voucherdetail(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-1">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy-fill"></i> Lưu Lại</button>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>

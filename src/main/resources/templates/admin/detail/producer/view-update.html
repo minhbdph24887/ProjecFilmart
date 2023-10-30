@@ -1,0 +1,52 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <h3>Cập Nhật Nhà Sản Xuất</h3>
+    <form th:action="@{/admin/producer/update}" th:object="${detailProducer}" method="post">
+        <div class="col-sm-12">
+            <div class="from-group">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>ID Của Nhà Sản Xuất: </label>
+                        <input type="text" class="form-control" name="idProducer" th:field="*{idProducer}" readonly/>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Tên Của Nhà Sản Xuất: </label>
+                        <input type="text" class="form-control" name="nameProducer" th:field="*{nameProducer}"
+                               placeholder="Nhập Tên Của Nhà Sản Xuất"/>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Trạng Thái: </label>
+                        <select name="status" class="form-control">
+                            <option value="1" th:selected="${detailProducer.status == 1}">
+                                Đang Hoạt Động
+                            </option>
+                            <option value="0" th:selected="${detailProducer.status == 0}">
+                                Ngừng Hoạt Động
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-floppy-fill"></i>
+                        Lưu Lại
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+
+</html>

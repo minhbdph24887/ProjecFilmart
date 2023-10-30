@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <h1>Quản Lý Màu Sắc</h1>
+    <div class="navbar-nav">
+        <h3>Danh Sách Màu Sắc</h3>
+    </div>
+    <div class="navbar-right">
+        <a th:href="@{/admin/color/view-add}" class="btn btn-info">
+            <i class="bi bi-palette-fill"></i>
+            Thêm Màu Sắc
+        </a>
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên Màu Sắc</th>
+            <th>Trang Thái</th>
+            <th>Hành Động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="listColor, stat : ${listColor}">
+            <td th:text="${stat.count}"></td>
+            <td>
+                <input type="color" th:value="${listColor.codeColor}" disabled/>
+            </td>
+            <td th:text="${listColor.getAllStatus()}"></td>
+            <td>
+                <a th:href="@{/admin/color/detail/{id}(id=${listColor.idColor})}" class="btn btn-primary">
+                    <i class="bi bi-eye-fill"></i>
+                </a>
+                <a th:href="@{/admin/color/delete/{id}(id=${listColor.idColor})}" class="btn btn-danger">
+                    <i class="bi bi-trash-fill"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center pagination-sm">
+            <li th:each="i : ${#numbers.sequence(0, listColor.totalPages - 1)}" th:class="${i == page ? 'active' : ''}"
+                class="page-item">
+                <a th:href="@{/admin/color(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+            </li>
+        </ul>
+    </nav>
+</main>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+<body>
+<main>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Hóa Đơn Của Tôi</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>No.</th>
+                <th>Hóa Đơn Số</th>
+                <th>Người Tạo Hóa Đơn</th>
+                <th>Ngày Tạo Hoá Đơn</th>
+                <th>Địa Chỉ Nhận Hàng</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="listOrder, state : ${listOrder}">
+                <td>[[${state.index}]]</td>
+                <td>[[${listOrder.idOrder}]]</td>
+                <td>[[${listOrder.account.username}]]</td>
+                <td>[[${listOrder.createDate}]]</td>
+                <td>[[${listOrder.address}]]</td>
+                <td>
+                    <a th:href="@{|/admin/order/detail/${listOrder.idOrder}|}" class="btn btn-default">
+                        <b class="glyphicon glyphicon-search"></b>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example" class="container">
+            <ul class="pagination justify-content-center pagination-sm">
+                <li th:each="i : ${#numbers.sequence(0, listOrder.totalPages - 1)}"
+                    th:class="${i == page ? 'active' : ''}" class="page-item">
+                    <a th:href="@{/admin/order(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Chi Tiết Hóa Đơn</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>NO</th>
+                <th>Ảnh Sản Phẩm</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Gía Sản Phẩm</th>
+                <th>Số Lượng Mua</th>
+                <th>Thành Tiền</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="orderDetail : ${detailOrder}">
+                <td>[[*{orderDetail.productDetail.idProductDetail}]]</td>
+                <td>
+                    <img th:src="@{|/images/${orderDetail.productDetail.images}|}" style="width: 200px; height: 200px;"
+                         alt=""
+                         src=""/>
+                </td>
+                <td>[[*{orderDetail.productDetail.product.nameProduct}]]</td>
+                <td>[[*{#numbers.formatDecimal(orderDetail.price, 0, 'COMMA', 0, 'POINT')}]] VND</td>
+                <td>[[*{orderDetail.quantity}]]</td>
+                <td>[[*{#numbers.formatDecimal(orderDetail.price * orderDetail.quantity, 0, 'COMMA', 0, 'POINT')}]]
+                    VND
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

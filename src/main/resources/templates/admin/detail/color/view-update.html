@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <h3>Cập Nhật Màu Sắc</h3>
+    <form th:action="@{/admin/color/update}" th:object="${detailColor}" method="post">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>ID Của Màu Sắc: </label>
+                        <input type="text" class="form-control" name="idColor" th:field="*{idColor}" readonly/>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <label>Tên Màu Sắc: </label>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <input type="color" name="codeColor" th:field="*{codeColor}" id="favcolor"
+                                       class="form-control"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <p id="colorValue" class="form-control"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label>Trạng Thái: </label>
+                    <select name="status" class="form-control">
+                        <option value="1" th:selected="${detailColor.status == 1}">
+                            Đang Hoạt Động
+                        </option>
+                        <option value="0" th:selected="${detailColor.status == 0}">
+                            Ngừng Hoạt Động
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-floppy-fill"></i>
+                        Lưu Lại
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <h1>Quản Lý Nhà Sản Xuất</h1>
+    <div class="navbar-nav">
+        <h3>Danh Sách Nhà Sản Xuất</h3>
+    </div>
+    <div class="navbar-right">
+        <a th:href="@{/admin/producer/view-add}" class="btn btn-info">
+            <i class="bi bi-app"></i>
+            Thêm Nhà Sản Xuất
+        </a>
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên Nhà Sản Xuất</th>
+            <th>Trang Thái</th>
+            <th>Hành Động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="listProducer, stat : ${listProducer}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${listProducer.nameProducer}"></td>
+            <td th:text="${listProducer.getAllStatus()}"></td>
+            <td>
+                <a th:href="@{/admin/producer/detail/{id}(id=${listProducer.idProducer})}" class="btn btn-primary"><i
+                        class="bi bi-eye-fill"></i></a>
+                <a th:href="@{/admin/producer/delete/{id}(id=${listProducer.idProducer})}" class="btn btn-danger"><i
+                        class="bi bi-trash-fill"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center pagination-sm">
+            <li th:each="i : ${#numbers.sequence(0, listProducer.totalPages - 1)}"
+                th:class="${i == page ? 'active' : ''}" class="page-item">
+                <a th:href="@{/admin/producer(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+            </li>
+        </ul>
+    </nav>
+</main>
+</body>
+
+</html>

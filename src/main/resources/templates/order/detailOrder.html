@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/indexClient :: dynamic (~{:: main})}">
+
+<body>
+<main th:object="${orderDetail}">
+    <br>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Chi Tiết Hóa Đơn</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <div>Hóa Đơn Số:</div>
+                    <input th:field="*{idOrder}" class="form-control" readonly>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <div>Nguời Tạo Hóa Đơn:</div>
+                    <input th:field="*{account.username}" class="form-control" readonly>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <div>Ngày Tạo Hoá Đơn:</div>
+                    <input th:field="*{createDate}" class="form-control" readonly>
+                </div>
+
+                <div class="form-group col-sm-12">
+                    <div>Địa Chỉ Đặt Hoá Đơn:</div>
+                    <textarea th:field="*{address}" class="form-control" readonly></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Danh Sách Sản Phẩm Trong Hóa Đơn</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>NO</th>
+                <th>Ảnh Sản Phẩm</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Gía Sản Phẩm</th>
+                <th>Số Lượng Mua</th>
+                <th>Thành Tiền</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="orderDetail : *{orderDetails}" th:object="${orderDetail}">
+                <td>[[*{productDetail.idProductDetail}]]</td>
+                <td>
+                    <img th:src="@{|/images/${orderDetail.productDetail.images}|}" style="width: 200px; height: 200px;"
+                         alt=""
+                         src=""/>
+                </td>
+                <td>[[*{productDetail.product.nameProduct}]]</td>
+                <td>[[*{#numbers.formatDecimal(price, 0, 'COMMA', 0, 'POINT')}]] VND</td>
+                <td>[[*{quantity}]]</td>
+                <td>[[*{#numbers.formatDecimal(price * quantity, 0, 'COMMA', 0, 'POINT')}]] VND</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

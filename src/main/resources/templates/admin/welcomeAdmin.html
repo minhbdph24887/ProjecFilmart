@@ -1,0 +1,86 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Danh Sách ADMIN</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ Và Tên</th>
+                <th>Giới Tính</th>
+                <th>Email</th>
+                <th>Số Điện Thoại</th>
+                <th>Ngày Sinh</th>
+                <th>Dịa Chỉ</th>
+                <th>Trang Thái</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="listAdmin, stat : ${listAdmin}">
+                <td th:text="${stat.count}"></td>
+                <td th:text="${listAdmin.fullName}"></td>
+                <td th:text="${listAdmin.sex ? 'Nam' : 'Nữ'}"></td>
+                <td th:text="${listAdmin.email}"></td>
+                <td th:text="${listAdmin.numberPhone}"></td>
+                <td th:text="${#temporals.format(listAdmin.birthday, 'dd/MM/yyyy')}"></td>
+                <td th:text="${listAdmin.address}"></td>
+                <td th:text="${listAdmin.getAllStatus()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example" class="container">
+            <ul class="pagination justify-content-center pagination-sm">
+                <li th:each="i : ${#numbers.sequence(0, listAdmin.totalPages - 1)}"
+                    th:class="${i == page ? 'active' : ''}"
+                    class="page-item">
+                    <a th:href="@{/admin(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Danh Sách Khách Hàng</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ Và Tên</th>
+                <th>Giới Tính</th>
+                <th>Email</th>
+                <th>Số Điện Thoại</th>
+                <th>Ngày Sinh</th>
+                <th>Dịa Chỉ</th>
+                <th>Trang Thái</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="listClient, stat : ${listClient}">
+                <td th:text="${stat.count}"></td>
+                <td th:text="${listClient.fullName}"></td>
+                <td th:text="${listClient.sex ? 'Nam' : 'Nữ'}"></td>
+                <td th:text="${listClient.email}"></td>
+                <td th:text="${listClient.numberPhone}"></td>
+                <td th:text="${#temporals.format(listClient.birthday, 'dd/MM/yyyy')}"></td>
+                <td th:text="${listClient.address}"></td>
+                <td th:text="${listClient.getAllStatus()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example" class="container">
+            <ul class="pagination justify-content-center pagination-sm">
+                <li th:each="i : ${#numbers.sequence(0, listClient.totalPages - 1)}"
+                    th:class="${i == page ? 'active' : ''}"
+                    class="page-item">
+                    <a th:href="@{/admin(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</main>
+</body>
+
+</html>

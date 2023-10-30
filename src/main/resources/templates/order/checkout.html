@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/indexClient :: dynamic (~{:: main})}">
+
+<body>
+<main>>
+    <div th:replace="~{/cart/viewCart :: detailCart}"></div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Thông Tin Hóa Đơn Đặt Hàng</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <div>Người Tạo Hóa Đơn:</div>
+                    <div class="col-sm-5">
+                        <div class="form-control" id="username">[[${#request.remoteUser}]]</div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-control">[[${session.loggedInUser.fullName}]]</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <div>Ngày Tạo Hóa Đơn:</div>
+                    <div class="form-control">{{order.createDate | date : 'dd-MM-yyyy'}}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <div>Tổng Tiền Hóa Đơn:</div>
+                    <div class="form-control">{{order.totalAmount | number : 0}} VND</div>
+                </div>
+
+                <div class="form-group col-sm-8">
+                    <div>Địa Chỉ Nhận Hàng:</div>
+                    <input type="text" ng-model="order.address" class="form-control" required></input>
+                    <input type="hidden" ng-model="order.status">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <div>Ghi Chú:</div>
+                    <textarea ng-model="order.note" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-footer text-right">
+            <button ng-click="order.purchase()" class="btn btn-success">Thanh Toán</button>
+        </div>
+    </div>
+</main>
+</body>
+</html>

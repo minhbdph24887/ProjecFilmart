@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org" th:replace="~{/layout/indexClient :: dynamic(~{:: main})}" lang="en">
+
+<body>
+<main th:object="${detailProductDetail}" class="poly-item-detail">
+    <h1>Chi Tiết Sản Phẩm [[${detailProductDetail.product.nameProduct}]]</h1>
+    <div class="row" th:if="${detailProductDetail.status == 1}">
+
+        <!-- Hiện Thị Anh -->
+        <div class="panel panel-primary">
+            <div class="panel-body text-center">
+                <img th:src="@{|/images/*{images}|}" alt="" src="" style="width: 100%; height: 666px;"/>
+            </div>
+        </div>
+
+        <!-- Hiển Thị Thông Tin Sản Phẩm -->
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <h3> Thông Tin Chi Tiết Sản Phẩm: </h3>
+                <ul>
+                    <li> Tên Của Sản Phẩm: <span th:text="*{product.nameProduct}"></span></li>
+                    <li> Số Lượng Của Sản Phẩm Trong Kho: <span th:text="*{quantity}"></span> Chiếc</li>
+                    <li> Giá Của Sản Phẩm: <span
+                            th:text="${#numbers.formatDecimal(detailProductDetail.costPrice, 0, 'COMMA', 0, 'POINT')} + ' VND'"></span>
+                    </li>
+                    <li> Thuộc Danh Mục Sản Phẩm: <span th:text="${detailProductDetail.category.nameCategory}"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="panel-footer text-right">
+                <button th:attr="ng-click=@{|cart.add(${detailProductDetail.idProductDetail})|}"
+                        class="btn btn-success">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                    Thêm Vào Giỏ Hàng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" th:if="${detailProductDetail.status != 1}">
+        <h2>Sản phẩm này hiện không hoạt động</h2>
+    </div>
+
+    <!-- Hiển Thị Danh Sách Sản Phẩm Cùng Loại -->
+    <div class="row" th:if="${sameCategoryProducts != null}">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Hàng Cùng Loại</div>
+            <div class="panel-body">
+                <ul>
+                    <li th:each="productDetail : ${sameCategoryProducts}">
+                        <a th:href="@{|/product/detail/${productDetail.idProductDetail}|}"
+                           th:text="${productDetail.product.nameProduct}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>

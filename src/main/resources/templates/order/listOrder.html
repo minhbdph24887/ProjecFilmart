@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/indexClient :: dynamic (~{:: main})}">
+
+<body>
+<main>
+    <br>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Hóa Đơn Của Tôi</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>No.</th>
+                <th>Hóa Đơn Số</th>
+                <th>Ngày Tạo Hoá Đơn</th>
+                <th>Địa Chỉ Nhận Hàng</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="listOrder, state : ${listOrder}">
+                <td>[[${state.index}]]</td>
+                <td>[[${listOrder.idOrder}]]</td>
+                <td>[[${listOrder.createDate}]]</td>
+                <td>[[${listOrder.address}]]</td>
+                <td>
+                    <a th:href="@{|/order/detail/${listOrder.idOrder}|}" class="btn btn-default">
+                        <b class="glyphicon glyphicon-search"></b>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example" class="container">
+            <ul class="pagination justify-content-center pagination-sm">
+                <li th:each="i : ${#numbers.sequence(0, listOrder.totalPages - 1)}"
+                    th:class="${i == page ? 'active' : ''}" class="page-item">
+                    <a th:href="@{/order(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <h1>Quản Lý Chi Tiết Sản Phẩm</h1>
+    <div class="navbar-nav">
+        <h3>Danh Sách Chi Tiết Sản Phẩm</h3>
+    </div>
+    <div class="navbar-right">
+        <a th:href="@{/admin/productdetail/view-add}" class="btn btn-info">
+            <i class="bi bi-box2-fill"></i>
+            Thêm Sản Phẩm Cụ Thể</a>
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Sản Phẩm</th>
+            <th>Màu Sắc</th>
+            <th>Kích Cỡ</th>
+            <th>Danh Mục</th>
+            <th>Ảnh Sản Phẩm</th>
+            <th>Số Lượng Tồn</th>
+            <th>Giá Nhập</th>
+            <th>Giá Bán</th>
+            <th>Trạng Thái</th>
+            <th>Hành Động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="listProductDetail, stat : ${listProductDetail}">
+            <td th:text="${stat.count}"></td>
+            <th th:text="${listProductDetail.product.nameProduct}"></th>
+            <th>
+                <input type="color" th:value="${listProductDetail.color.codeColor}" disabled/>
+            </th>
+            <th th:text="${listProductDetail.size.nameSize}"></th>
+            <th th:text="${listProductDetail.category.nameCategory}"></th>
+            <th>
+                <img th:src="@{|/images/${listProductDetail.images}|}" style="width: 200px; height: 200px;" alt=""
+                     src=""/>
+            </th>
+            <th th:text="${listProductDetail.quantity}"></th>
+            <td th:text="${#numbers.formatDecimal(listProductDetail.purchasePrice, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
+            <td th:text="${#numbers.formatDecimal(listProductDetail.costPrice, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
+            <th th:text="${listProductDetail.getAllStatus()}"></th>
+            <th>
+                <a th:href="@{/admin/productdetail/detail/{id}(id=${listProductDetail.idProductDetail})}"
+                   class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
+            </th>
+            <th>
+                <a th:href="@{/admin/productdetail/delete/{id}(id=${listProductDetail.idProductDetail})}"
+                   class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example" class="container">
+        <ul class="pagination justify-content-center pagination-sm">
+            <li th:each="i : ${#numbers.sequence(0, listProductDetail.totalPages - 1)}"
+                th:class="${i == page ? 'active' : ''}" class="page-item">
+                <a th:href="@{/admin/productdetail(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+            </li>
+        </ul>
+    </nav>
+</main>
+</body>
+</html>

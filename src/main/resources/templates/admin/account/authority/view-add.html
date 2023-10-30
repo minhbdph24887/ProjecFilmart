@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+<body>
+<main class="row">
+    <h3>Thêm Quyền Truy Cập</h3>
+    <form th:action="@{/admin/authority/add}" th:object="${authority}" method="post">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <label>Họ Và Tên: </label>
+                    <select name="account" class="form-control">
+                        <option th:each="listAccount : ${listAccount}" th:value="${listAccount.username}"
+                                th:text="${listAccount.fullName}"></option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label>Chức Vụ: </label>
+                    <select name="role" class="form-control">
+                        <option th:each="listRole : ${listRole}" th:value="${listRole.idRole}"
+                                th:text="${listRole.nameRole}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-floppy-fill"></i>
+                        Lưu Lại
+                    </button>
+                </div>
+                <div class="col-sm-1">
+                    <button type="reset" class="btn btn-primary">
+                        <i class="bi bi-arrow-clockwise"></i>
+                        Làm Mới
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>

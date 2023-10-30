@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org" th:replace="~{/layout/indexClient :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <div class="col-sm-12">
+        <br>
+    </div>
+    <div class="col-sm-12">
+        <div class=" row sm-8">
+            <form action="">
+                <div class="col-sm-7">
+                    <input type="search" class="form-control" placeholder="Tìm Kiếm Sản Phẩm Bạn Muốn Tìm"/>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-info" type="submit"><i class="bi bi-bing"></i></button>
+                </div>
+            </form>
+        </div>
+        <h1>Danh Sách Sản Phẩm</h1>
+        <div th:each="listProductDetail: ${listProductDetail}" class="col-sm-4">
+            <div class="panel panel-primary poly-item text-center">
+
+                <!-- Hiện Thị Tên -->
+                <div class="panel-heading">
+                    <div th:utext="${listProductDetail.product.nameProduct}"></div>
+                </div>
+
+                <!-- Hiện Thị Anh -->
+                <div class="panel-body">
+                    <a th:href="@{|/product/detail/${listProductDetail.idProductDetail}|}">
+                        <img th:src="@{|/images/${listProductDetail.images}|}" style="width: 200px; height: 200px;"
+                             alt=""
+                             src=""/>
+                    </a>
+                </div>
+
+                <!-- Hiện Thị Chức Năng -->
+                <div class="panel-footer text-right">
+                    <b class="pull-left">
+                        [[${#numbers.formatDecimal(listProductDetail.costPrice, 0, 'COMMA', 0, 'POINT')}]] VND
+                    </b>
+                    <button th:attr="ng-click=@{|cart.add(${listProductDetail.idProductDetail})|}" class="btn btn-success">
+                        <i class="glyphicon glyphicon-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class=" row">
+            <nav aria-label="Page navigation example">
+                <ul class="pager">
+                    <li th:each="i : ${#numbers.sequence(0, listProductDetail.totalPages - 1)}"
+                        th:class="${i == page ? 'active' : ''}"
+                        class="page-item">
+                        <a th:href="@{/product(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>

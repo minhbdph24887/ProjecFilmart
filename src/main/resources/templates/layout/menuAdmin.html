@@ -1,0 +1,111 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/product}">WebSiteFilMart</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/admin}">Trang Chủ</a></li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="bi bi-person-circle"></i>
+                        Quản Lý Account
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a th:href="@{/admin/account}">
+                                <i class="bi bi-person-fill"></i>
+                                Quản Lý Tài Khoản
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/authority}">
+                                <i class="bi bi-award"></i>
+                                Quản Lý Phân Quyền
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/role}">
+                                <i class="bi bi-pc-display-horizontal"></i>
+                                Quản Lý Quyền
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="bi bi-kanban-fill"></i>
+                        Quản Lý Chi Tiết
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a th:href="@{/admin/productdetail}">
+                                <i class="bi bi-inboxes-fill"></i>
+                                Quản Lý Chi Tiết Sản Phẩm
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/product}">
+                                <i class="bi bi-box-seam-fill"></i>
+                                Quản Lý Sản Phẩm
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/color}">
+                                <i class="bi bi-paint-bucket"></i>
+                                Quản Lý Màu Sắc
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/size}">
+                                <i class="bi bi-aspect-ratio-fill"></i>
+                                Quản Lý Size
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/producer}">
+                                <i class="bi bi-app-indicator"></i>
+                                Quản Lý Nhà Sản Xuất
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/category}">
+                                <i class="bi bi-bookmark-check-fill"></i>
+                                Quản Lý Danh Mục Sản Phẩm
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a th:href="@{/admin/voucher}">
+                        <i class="bi bi-backpack4-fill"></i>
+                        Quản Lý Voucher
+                    </a>
+                </li>
+
+                <li>
+                    <a th:href="@{/admin/order}">
+                        <i class="bi bi-receipt"></i>
+                        Quản Lý Hóa Đơn
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="bi bi-ticket-detailed-fill"></i>
+                        Thông Kê
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/logout}" onclick="alert(${message})"><span class="glyphicon glyphicon-log-in"></span>
+                    Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>

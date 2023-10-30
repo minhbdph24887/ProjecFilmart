@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <h3>Thêm Danh Mục Sản Phẩm</h3>
+    <form th:action="@{/admin/category/add}" th:object="${category}" method="post">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <label>Tên Danh Mục Sản Phẩm: </label>
+                    <input type="text" class="form-control" name="nameCategory"
+                           placeholder="Nhập Tên Danh Mục Sản Phẩm"/>
+                </div>
+                <div class="col-sm-3">
+                    <label>Trạng Thái: </label>
+                    <input type="text" class="form-control" value="Đang Hoạt Động" readonly/>
+                    <input type="hidden" name="status" value="1"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <br>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-floppy-fill"></i>
+                        Lưu Lại
+                    </button>
+                </div>
+                <div class="col-sm-1">
+                    <button type="reset" class="btn btn-primary">
+                        <i class="bi bi-arrow-clockwise"></i>
+                        Làm Mới
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>

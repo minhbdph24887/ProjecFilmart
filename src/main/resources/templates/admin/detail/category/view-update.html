@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <h3>Cập Nhật Danh Mục Sản Phẩm</h3>
+    <form th:action="@{/admin/category/update}" th:object="${detailCategory}" method="post">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label>ID Của Danh Mục Sản Phẩm: </label>
+                    <input type="text" class="form-control" name="idCategory" th:field="*{idCategory}" readonly/>
+                </div>
+                <div class="col-sm-7">
+                    <label>Tên Của Danh Mục Sản Phẩm: </label>
+                    <input type="text" class="form-control" name="nameCategory" th:field="*{nameCategory}"
+                           placeholder="Nhập Tên Của Danh Mục Sản Phẩm"/>
+                </div>
+                <div class="col-sm-2">
+                    <label>Trạng Thái: </label>
+                    <select name="status" class="form-control">
+                        <option value="1" th:selected="${detailCategory.status == 1}">
+                            Đang Hoạt Động
+                        </option>
+                        <option value="0" th:selected="${detailCategory.status == 0}">
+                            Ngừng Hoạt Động
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <br>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-floppy-fill"></i>
+                        Lưu Lại
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>

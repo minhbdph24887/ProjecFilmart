@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org" th:replace="~{/layout/indexClient :: dynamic(~{:: main})}" lang="en">
+
+<body>
+<main>
+    <div class="panel panel-primary" th:fragment="detailCart">
+        <div class="panel-heading">Giỏ Hàng Của Tôi</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Ảnh Sản Phẩm</th>
+                <th>Giá</th>
+                <th>Số Lượng</th>
+                <th>Tổng Tiền</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="listProductDetail in cart.listProductDetail">
+                <td>{{listProductDetail.idProductDetail}}</td>
+                <td>{{listProductDetail.product.nameProduct}}</td>
+                <td>
+                    <img ng-src="/images/{{listProductDetail.images}}" style="width: 200px; height: 200px;" alt=""
+                         src=""/>
+                </td>
+                <td>{{listProductDetail.costPrice | number : 0}} VND</td>
+                <td>
+                    <input type="number" ng-change="cart.saveToLoaclStorage()" ng-model="listProductDetail.quantity"
+                           min="1" style="width: 100px;">
+                </td>
+                <td>{{listProductDetail.quantity * listProductDetail.costPrice | number : 0}} VND</td>
+                <td>
+                    <button ng-click="cart.remove(listProductDetail.idProductDetail)" class="btn btn-sm btn-danger">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <button ng-click="cart.clear()" class="btn btn-danger">
+                <i class="glyphicon glyphicon-trash"></i> Xoá Tất Cả
+            </button>
+            <a th:href="@{|/order/checkout|}" class="btn btn-primary">
+                <i class="glyphicon glyphicon-hand-right"></i> Đặt Hàng
+            </a>
+            <p style="float: right;">Tổng tiền: {{cart.totalCost | number : 0}} VND</p>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>

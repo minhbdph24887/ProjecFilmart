@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <h3>Thêm Kích Cỡ Size</h3>
+    <form th:action="@{/admin/size/add}" th:object="${size}" method="post">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <div class="form-group">
+                        <label>Kích Cỡ Size: </label>
+                        <div class="col-sm-12">
+                            <div class="col-sm-3">
+                                <label>
+                                    <input type="radio" name="nameSize" value="XXS" checked="">
+                                    Size XXS
+                                </label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>
+                                    <input type="radio" name="nameSize" value="XS">
+                                    Size XS
+                                </label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>
+                                    <input type="radio" name="nameSize" value="S">
+                                    Size S
+                                </label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>
+                                    <input type="radio" name="nameSize" value="M">
+                                    Size M
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>
+                                    <input type="radio" name="nameSize" value="L">
+                                    Size L
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>
+                                    <input type="radio" name="nameSize" value="XL">
+                                    Size XL
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>
+                                    <input type="radio" name="nameSize" value="2XL">
+                                    Size 2XL
+                                </label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>
+                                    <input type="radio" name="nameSize" value="3XL">
+                                    Size 3XL
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Trạng Thái: </label>
+                        <input type="text" class="form-control" value="Đang Hoạt Động" readonly/>
+                        <input type="hidden" name="status" value="1"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-floppy-fill"></i>
+                        Lưu Lại
+                    </button>
+                </div>
+                <div class="col-sm-1">
+                    <button type="reset" class="btn btn-primary">
+                        <i class="bi bi-arrow-clockwise"></i>
+                        Làm Mới
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>

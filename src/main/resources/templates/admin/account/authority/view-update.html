@@ -1,0 +1,53 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/indexAdmin :: dynamic(~{:: main})}">
+
+<body>
+<main>
+    <h3>Câp Nhật Quyền Truy Cập</h3>
+    <form th:action="@{/admin/authority/update}" th:object="${detailAuthority}" method="post">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <label>ID Của Phân Quyền: </label>
+                    <input type="text" class="form-control" name="idAuthority" th:field="*{idAuthority}" readonly/>
+                </div>
+                <div class="col-sm-4">
+                    <label>Họ Và Tên: </label>
+                    <select name="account" class="form-control">
+                        <option th:each="listAccount : ${listAccount}"
+                                th:value="${listAccount.username}"
+                                th:text="${listAccount.fullName}"
+                                th:selected="${detailAuthority.account.username == listAccount.username}">
+                        </option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label>Quyền: </label>
+                    <select name="role" class="form-control">
+                        <option th:each="listRole : ${listRole}"
+                                th:value="${listRole.idRole}"
+                                th:text="${listRole.nameRole}"
+                                th:selected="${detailAuthority.role.idRole == listRole.idRole}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="col-sm-1">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-floppy-fill"></i>
+                    Lưu Lại
+                </button>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+
+</html>
