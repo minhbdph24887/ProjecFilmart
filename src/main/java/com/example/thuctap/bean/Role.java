@@ -37,4 +37,9 @@ public class Role implements Serializable {
             return "Ngừng Hoạt Động";
         }
     }
+
+    public Role(String idRole, String nameRole) {
+        this.idRole = idRole;
+        this.nameRole = nameRole;
+    }
 }

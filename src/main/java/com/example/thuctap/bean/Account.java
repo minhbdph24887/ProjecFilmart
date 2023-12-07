@@ -55,6 +55,17 @@ public class Account implements Serializable {
     @OneToMany(mappedBy = "account")
     List<Order> orders;
 
+    public Account(String username, String fullName, String email, String numberPhone, Boolean sex, LocalDate birthday, String address, String password) {
+        this.username = username;
+        this.fullName = fullName;
+        this.email = email;
+        this.numberPhone = numberPhone;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.address = address;
+        this.password = password;
+    }
+
     public String getAllStatus() {
         if (this.status != null) {
             if (this.status == 1) {
